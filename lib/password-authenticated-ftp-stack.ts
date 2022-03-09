@@ -30,14 +30,14 @@ export class PasswordAuthenticatedFtpStack extends cdk.Stack {
     // Create an FTP user with randomly generated password
     new FtpUser(this, `User1`, {
       transferServerId: ftp.server.attrServerId,
-      accessableBucket: bucket,
+      accessibleBucket: bucket,
       homeDirectory: "home",
     });
 
     // You can specify password explicitly
     new FtpUser(this, `User2`, {
       transferServerId: ftp.server.attrServerId,
-      accessableBucket: bucket,
+      accessibleBucket: bucket,
       homeDirectory: "home",
       password: "password",
     });
