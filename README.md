@@ -9,6 +9,36 @@ It includes CDK constructs that follows the below architecture, and a CDK stack 
 
 You can read this article for futher detail of the architecture: [Enable password authentication for AWS Transfer Family using AWS Secrets Manager (updated)](https://aws.amazon.com/blogs/storage/enable-password-authentication-for-aws-transfer-family-using-aws-secrets-manager-updated/)
 
+## Code sample
+In this sample, you can define FTP server with password authentication by the following code:
+
+```ts
+
+// an AWS Transfer SFTP server
+const ftp = new PasswordAuthenticatedFtp(this, `Ftp`, {
+    vpc,
+    protocol: "SFTP",
+});
+
+// Create an FTP user with randomly generated password
+new FtpUser(this, `User1`, {
+    transferServerId: ftp.server.attrServerId,
+    accessibleBucket: bucket,
+    homeDirectory: "home",
+});
+
+// You can also specify password explicitly
+new FtpUser(this, `User2`, {
+    transferServerId: ftp.server.attrServerId,
+    accessibleBucket: bucket,
+    homeDirectory: "home",
+    password: "passw0rd",
+});
+```
+
+The actual constructs are located in [`lib/ftp`  directory](./lib/ftp).
+You can copy these files into your project and freely modify them as your own requirements.
+
 ## Deploy
 Before deploying this sample, you must install AWS Cloud Development Kit prerequisites. [Please refer to this document](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html) for the detailed instruction. Please make sure you've successfully completed `cdk bootstrap` step.
 
