@@ -26,7 +26,7 @@ export interface FtpUserProps {
   /**
    * the S3 bucket that this user has access to
    */
-  readonly accessableBucket: s3.IBucket;
+  readonly accessibleBucket: s3.IBucket;
 
   /**
    * the path of home directory for this user
@@ -55,7 +55,7 @@ export class FtpUser extends Construct {
           HomeDirectoryDetails: JSON.stringify([
             {
               Entry: "/",
-              Target: `/${props.accessableBucket.bucketName}/${props.homeDirectory}`,
+              Target: `/${props.accessibleBucket.bucketName}/${props.homeDirectory}`,
             },
           ]),
           Password: props.password,
@@ -65,7 +65,7 @@ export class FtpUser extends Construct {
       },
     });
 
-    props.accessableBucket.grantReadWrite(userRole, `${props.homeDirectory}`);
-    props.accessableBucket.grantReadWrite(userRole, `${props.homeDirectory}/*`);
+    props.accessibleBucket.grantReadWrite(userRole, `${props.homeDirectory}`);
+    props.accessibleBucket.grantReadWrite(userRole, `${props.homeDirectory}/*`);
   }
 }
