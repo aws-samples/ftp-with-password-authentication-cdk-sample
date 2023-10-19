@@ -1,5 +1,5 @@
 {
-  "name": "password-authenticated-ftp",
+  "name": "@aws-samples/password-authenticated-ftp",
   "version": "0.1.0",
   "bin": {
     "password-authenticated-ftp": "bin/password-authenticated-ftp.js"
