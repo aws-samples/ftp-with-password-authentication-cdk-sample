@@ -45,7 +45,7 @@ export class PasswordAuthenticatedFtp extends Construct {
 
     const authHandler = new lambda.PythonFunction(this, `AuthHandler`, {
       entry: "lib/ftp/custom-authorizer",
-      runtime: Runtime.PYTHON_3_9,
+      runtime: Runtime.PYTHON_3_12,
     });
 
     const route = api.root.addResource("servers").addResource("{serverId}").addResource("users").addResource("{username}").addResource("config");
