@@ -1,7 +1,7 @@
 import json
 import boto3
 import os
-from moto import mock_secretsmanager
+from moto import mock_aws
 
 region = os.environ["AWS_REGION"]
 
@@ -23,7 +23,7 @@ def create_secret(client, server_id, username, password):
     return role_arn, home_directory_details
 
 
-@mock_secretsmanager
+@mock_aws
 def test_with_correct_password():
     from index import handler
     client = boto3.session.Session().client(
